@@ -15,12 +15,15 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
     //Global variables
     private int count = 0;
+    private int livesCount = 3;
     private int n1, n2;
 
     @Override
@@ -61,11 +64,19 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "They're equal, correct!", Toast.LENGTH_SHORT).show();
         }
         else{
-            count--;
-            Toast.makeText(getApplicationContext(), "Sorry, that's not correct.", Toast.LENGTH_SHORT).show();
+            livesCount--;
+            if(livesCount == 0){
+                Toast.makeText(getApplicationContext(), "Game Over", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Toast.makeText(getApplicationContext(), "Sorry, that's not correct.", Toast.LENGTH_SHORT).show();
+            }
         }
+
         TextView tv = findViewById(R.id.tvPoints);
         tv.setText("Points: "+count);
+        TextView tv2 = findViewById(R.id.tvLives);
+        tv2.setText("Lives: "+livesCount);
         generateRand();
     }
 
@@ -79,11 +90,19 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "They're equal, correct!", Toast.LENGTH_SHORT).show();
         }
         else{
-            count--;
-            Toast.makeText(getApplicationContext(), "Sorry, that's not correct.",Toast.LENGTH_SHORT).show();
+            livesCount--;
+            if(livesCount == 0){
+                Toast.makeText(getApplicationContext(), "Game Over", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                Toast.makeText(getApplicationContext(), "Sorry, that's not correct.",Toast.LENGTH_SHORT).show();
+            }
         }
+
         TextView tv = findViewById(R.id.tvPoints);
         tv.setText("Points: "+count);
+        TextView tv2 = findViewById(R.id.tvLives);
+        tv2.setText("Lives: "+livesCount);
         generateRand();
     }
 }
