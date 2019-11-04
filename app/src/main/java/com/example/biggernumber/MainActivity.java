@@ -20,7 +20,7 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
 
     //Global variables
-
+    private int count = 0;
     private int n1, n2;
 
     @Override
@@ -53,31 +53,37 @@ public class MainActivity extends AppCompatActivity {
 
     public void on_ClickLeft(View view) {
         if(n1 > n2){
+            count++;
             Toast.makeText(getApplicationContext(), "Congratulations! That's correct!", Toast.LENGTH_SHORT).show();
         }
         else if(n1 == n2){
+            count++;
             Toast.makeText(getApplicationContext(), "They're equal, correct!", Toast.LENGTH_SHORT).show();
         }
         else{
+            count--;
             Toast.makeText(getApplicationContext(), "Sorry, that's not correct.", Toast.LENGTH_SHORT).show();
         }
-        //TextView tv = findViewById(R.id.tvPoints);
-        //tv.setText("Points: "+count);
+        TextView tv = findViewById(R.id.tvPoints);
+        tv.setText("Points: "+count);
         generateRand();
     }
 
     public void on_ClickRight(View view){
         if(n1 < n2){
+            count++;
             Toast.makeText(getApplicationContext(), "Congratulations! That's correct!", Toast.LENGTH_SHORT).show();
         }
         else if(n2 == n1){
+            count++;
             Toast.makeText(getApplicationContext(), "They're equal, correct!", Toast.LENGTH_SHORT).show();
         }
         else{
+            count--;
             Toast.makeText(getApplicationContext(), "Sorry, that's not correct.",Toast.LENGTH_SHORT).show();
         }
-        //TextView tv = findViewById(R.id.tvPoints);
-        //tv.setText("Points: "+count);
+        TextView tv = findViewById(R.id.tvPoints);
+        tv.setText("Points: "+count);
         generateRand();
     }
 }
