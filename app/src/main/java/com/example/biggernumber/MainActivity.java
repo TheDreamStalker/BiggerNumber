@@ -13,10 +13,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.Random;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
+
+    //Global variables
+
+    private int n1, n2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,43 +30,54 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        generateRand();
+    }
+
+    private void generateRand(){
+        //Generate random numbers
+        Random rand = new Random();
+        n1 = rand.nextInt(10);
+        n2 = rand.nextInt(10);
+
         //Defining buttons
-        Button first_n = findViewById(R.id.num1);
-        Button second_n = findViewById(R.id.num2);
+        Button b1 = findViewById(R.id.num1);
+        Button b2 = findViewById(R.id.num2);
 
-        //Setting them to listen for a click
-        first_n.setOnClickListener(this);
-        second_n.setOnClickListener(this);
+        //Change the buttons' text to the random number.
+        b1.setText(Integer.toString(n1));
+        b2.setText(Integer.toString(n2));
     }
 
 
-    @Override
-    public void onClick(View v) {
-        //Switch for the different buttons
-        switch (v.getId()){
-            case R.id.num1:
-                generate_num1();
-                break;
-            case R.id.num2:
-                generate_num2();
-                break;
-            default:
-                System.out.println("Something went wrong");
-                break;
+    //Methods for each button
+
+    public void on_ClickLeft(View view) {
+        if(n1 > n2){
+            Toast.makeText(getApplicationContext(), "Congratulations! That's correct!", Toast.LENGTH_SHORT).show();
         }
+        else if(n1 == n2){
+            Toast.makeText(getApplicationContext(), "They're equal, correct!", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "Sorry, that's not correct.", Toast.LENGTH_SHORT).show();
+        }
+        //TextView tv = findViewById(R.id.tvPoints);
+        //tv.setText("Points: "+count);
+        generateRand();
     }
 
-    public void generate_num1(){
-        TextView tv = findViewById(R.id.textView);
-        Random r = new Random();
-        int number = r.nextInt(6);
-        tv.setText(Integer.toString(number));
-    }
-
-    public void generate_num2(){
-        TextView tv2 = findViewById(R.id.textView2);
-        Random r = new Random();
-        int number = r.nextInt(6);
-        tv2.setText(Integer.toString(number));
+    public void on_ClickRight(View view){
+        if(n1 < n2){
+            Toast.makeText(getApplicationContext(), "Congratulations! That's correct!", Toast.LENGTH_SHORT).show();
+        }
+        else if(n2 == n1){
+            Toast.makeText(getApplicationContext(), "They're equal, correct!", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "Sorry, that's not correct.",Toast.LENGTH_SHORT).show();
+        }
+        //TextView tv = findViewById(R.id.tvPoints);
+        //tv.setText("Points: "+count);
+        generateRand();
     }
 }
